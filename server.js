@@ -25,7 +25,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({limit :'10mb',extended:false}))
 
 //Database connection
-mongoose.connect('mongodb+srv://atish721:kp22tWBmBNI60kMy@atsnode.rrlwcc9.mongodb.net/?retryWrites=true&w=majority',{useNewUrlParser:true})
+mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser:true})
 const db = mongoose.connection
 db.on('error',error=>console.error(error))
 db.once('open',()=>{
