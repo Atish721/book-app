@@ -11,6 +11,7 @@ const bodyParser = require('body-parser')
 
 const indexRoutes = require('./routes/index')
 const authorRoutes = require('./routes/authors')
+const bookRoutes = require('./routes/books')
 
 //Port
 const port = process.env.PORT || 3000
@@ -35,6 +36,7 @@ db.once('open',()=>{
 //Routes
 app.use('/',indexRoutes)
 app.use('/authors',authorRoutes)
+app.use('/books',bookRoutes)
 
 app.listen(port,()=>{
     console.log(`Server running on http://127.0.0.1:${port}`)
