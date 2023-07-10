@@ -1,1 +1,10 @@
-Home Author
+<h2>Recently Added</h2>
+<div>
+    <%
+        books.forEach(book => {
+            %>
+            <img height = '150' wigth='100' src='<%=book.coverImagePath%>'
+            <%
+        });
+    %>
+</div>

@@ -5,14 +5,19 @@
 
 <div>
     <label>Author</label>
-    <select>
-        <% authors.forEach(author=>{
-            let selected = (author.id===book.author) ? 'selected=\'selected\'' : '' %>
-            <option <%=selected%> label='<%=author.name%>' value='<%=author.id%>'>
-                        <% }) %>
+    <select name='author'>
+        <% 
+            authors.forEach(author=>{
+                let selected = (author.id===book.author) ? 'selected=\'selected\'' : '' 
+        %>
+                <option <%=selected%> label='<%=author.name%>' value='<%=author.id%>'>
+        <% 
+            }) 
+        %>
 
     </select>
 </div>
+
 
 <div>
     <label>Publish Date</label>
