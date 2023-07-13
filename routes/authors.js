@@ -15,7 +15,7 @@ router.get('/', async (req, resp) => {
         const authors = await Author.find(searchOptions)
         resp.render('authors/index', { authors: authors, searchOptions:req.query })
     } catch (error) {
-        console.log(error)
+        
         resp.redirect('/')
     }
 })
@@ -41,7 +41,7 @@ router.post('/', async (req, resp) => {
             author: author,
             errorMessage: 'Error while creating author.'
         })
-        console.log(err)
+        
     }
 
     // author.save((err,newAuthor)=>{
@@ -72,7 +72,7 @@ router.get('/:id',async(req,resp)=>{
     }
     catch(err)
     {
-        console.log(err)
+        
         resp.redirect('/')
     }
 })
@@ -98,7 +98,7 @@ router.put('/:id',async (req,resp)=>{
         resp.redirect(`/authors/${author.id}`)
         
     } catch (err) {
-        console.log(err)
+        
 
         if(author==null)
         {
@@ -126,8 +126,7 @@ router.delete('/:id',async(req,resp)=>{
         resp.redirect('/authors')
         
     } catch (err) {
-        console.log('DEL')
-        console.log(err)
+        
 
         if(author==null)
         {
