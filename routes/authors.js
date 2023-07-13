@@ -19,7 +19,7 @@ router.get('/', async (req, resp) => {
     }
 })
 
-//New author
+//New author form
 router.get('/new', (req, resp) => {
     resp.render('authors/new', { author: new Author() })
 })
@@ -33,8 +33,8 @@ router.post('/', async (req, resp) => {
 
     try {
         const newAuthor = await author.save()
-        // res.redirect(`authors/${newAuthor.id}`)
-        resp.redirect(`authors`)
+        resp.redirect(`authors/${newAuthor.id}`)
+       
     } catch (err) {
         resp.render('authors/new', {
             author: author,
@@ -56,6 +56,73 @@ router.post('/', async (req, resp) => {
     //         resp.redirect(`authors`)
     //     }
     // })
+})
+
+router.get('/:id',(req,resp)=>{
+    resp.send('Show author:'+req.params.id)
+})
+
+router.get('/:id/edit',async (req,resp)=>{
+    try {
+        const author = await Author.findById(req.params.id)
+
+        resp.render('authors/edit', { author:author })
+    } catch (error) {
+        req.redirect('/autors')
+    }
+})
+
+router.put('/:id',async (req,resp)=>{
+    
+    let author
+
+    try {
+        author = await Author.findById(req.params.id)
+        author.name = req.body.name
+        await author.save()
+        resp.redirect(`/authors/${author.id}`)
+        
+    } catch (err) {
+        console.log(err)
+
+        if(author==null)
+        {
+            resp.redirect('/')
+        }
+        else
+        {
+            resp.render('authors/edit', {
+                author: author,
+                errorMessage: 'Error while updating author.'
+            })
+        }
+        
+    }
+})
+
+router.delete('/:id',async(req,resp)=>{
+    let author
+
+    try {
+        author = await Author.findById(req.params.id)
+        
+        await author.remove()
+
+        resp.redirect('/authors')
+        
+    } catch (err) {
+        console.log('DEL')
+        console.log(err)
+
+        if(author==null)
+        {
+            resp.redirect('/')
+        }
+        else
+        {
+            resp.redirect(`/authors/${author.id}`)
+        }        
+    }
 })
 
 module.exports = router
