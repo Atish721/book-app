@@ -121,8 +121,8 @@ router.delete('/:id',async(req,resp)=>{
     try {
         author = await Author.findById(req.params.id)
         
-        await author.deleteOne({_id:author.id})
-
+        await author.deleteOne()
+        
         resp.redirect('/authors')
         
     } catch (err) {
