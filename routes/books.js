@@ -64,7 +64,7 @@ router.post('/', async (req, resp) => {
 
     try {
         const newBook = await book.save()
-        resp.render(`/books/${newBook.id}`)
+        resp.redirect(`/books/${newBook.id}`)
 
     } catch (error) {
         // if (book.coverImageName != null) {
