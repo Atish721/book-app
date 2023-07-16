@@ -25,7 +25,7 @@ app.set('layout', 'layouts/layout')
 app.use(expressLayoutes)
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, '')))
+app.use(express.static())
 
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
 
