@@ -121,9 +121,18 @@ router.delete('/:id',async(req,resp)=>{
     try {
         author = await Author.findById(req.params.id)
         
-        await author.deleteOne()
+        const book = await Books.findOne({author:author.id},['_id'])
         
-        resp.redirect('/authors')
+        if(book==null)
+        {
+            await author.deleteOne({_id:author.id})
+            resp.redirect('/authors')
+        }
+        else
+        {
+            resp.redirect(`/authors/${author.id}`)
+        }
+        
         
     } catch (err) {
         
